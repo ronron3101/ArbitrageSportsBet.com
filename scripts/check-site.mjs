@@ -2,7 +2,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const root = resolve('.');
-const siteBase = '/ArbitrageSportsBetting.com';
+const siteBase = '';
 const files = [];
 
 function walk(dir) {
