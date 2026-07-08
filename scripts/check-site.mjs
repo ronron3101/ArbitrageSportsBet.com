@@ -19,6 +19,15 @@ const bad = [];
 for (const path of files) {
   const html = readFileSync(path, 'utf8');
 
+  // Search-engine ownership verification files have a fixed one-line format.
+  if (/\/google[0-9a-f]+\.html$/.test(path)) {
+    const name = path.split('/').pop();
+    if (html.trim() !== `google-site-verification: ${name}`) {
+      bad.push(`${path}: unexpected google verification content`);
+    }
+    continue;
+  }
+
   // Vendor verification files are intentionally minimal and should not be
   // forced through editorial page checks.
   if (path.endsWith('/affiliate_verification.html')) {
