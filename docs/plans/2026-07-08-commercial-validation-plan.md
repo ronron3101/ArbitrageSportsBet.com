@@ -116,11 +116,11 @@ BetBurger application → review access → affiliate links live on `/reviews/be
 
 ## 21. Launch-ready milestone checklist
 
-- [x] 35–40 indexable pages (37 live in repo)
-- [ ] Search Console verified + sitemap submitted (user action)
-- [ ] Analytics installed (Plausible account — user action)
-- [x] ≥2 affiliate programs with outcomes (BetBurger terms confirmed; RebelBetting reply received; OddsJam hold documented)
-- [x] Top-3 reviews carry dated evidence (2026-07-01 snapshots; browser screenshots still to add)
+- [x] 35–40 indexable pages (37 live, all returning HTTP 200)
+- [x] Search Console verified (HTML file `google416aa6f8d37af12c.html`, 2026-07-08) + sitemap.xml submitted
+- [x] Analytics installed (GA4 property "ArbitrageSportsBet.com", stream 15221899573, tag `G-S2HZ4HCDHK` on all pages; enhanced measurement incl. outbound clicks enabled). Note: revisit EEA consent-mode question if EU traffic grows — GA4 chosen over Plausible because the Google account already existed.
+- [x] ≥2 affiliate programs with outcomes (BetBurger terms confirmed; RebelBetting reply received; OddsJam hold documented) — follow-up emails staged in Gmail drafts
+- [x] Top-3 reviews carry dated evidence (2026-07-01 browser observations + 2026-07-08 re-verification; HTML snapshots in vault `Evidence Snapshots/`)
 - [x] Money pages: CTA + disclosure + RG link + internal links
-- [x] `npm test` passes (38 files)
-- [ ] Live smoke checks post-deploy (after push)
+- [x] `npm test` passes (39 files)
+- [x] Live smoke checks: all 37 sitemap URLs returned HTTP 200 post-deploy (2026-07-08)
