@@ -51,5 +51,6 @@ function calcKelly(){
 }
 
 function runCalcs(){[calcArb,calcImplied,calcHedge,calcEV,calcKelly].forEach(f=>{try{f()}catch(e){}})}
+document.addEventListener('click',e=>{const a=e.target.closest('a[data-partner]');if(a&&typeof gtag==='function')gtag('event','partner_click',{partner:a.dataset.partner,page_path:location.pathname})});
 document.addEventListener('input',e=>{if(e.target.closest('.calc'))runCalcs()});
 document.addEventListener('DOMContentLoaded',runCalcs);
