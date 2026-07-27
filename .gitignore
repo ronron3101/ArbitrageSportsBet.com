@@ -1,0 +1,14 @@
+# Private strategy docs — this repo is public, keep them out of it
+docs/private/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Local env / secrets
+.env
+.env.*
+
+# Node (no build step today, but npm test runs here)
+node_modules/
+npm-debug.log*
