@@ -1,6 +1,9 @@
 # Private strategy docs — this repo is public, keep them out of it
 docs/private/
 
+# Local instructions (imports the private brief) — personal, never committed
+CLAUDE.local.md
+
 # macOS
 .DS_Store
 **/.DS_Store
