@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const root = resolve('.');
+const origin = 'https://arbitragesportsbet.com';
 const siteBase = '';
 const files = [];
 
@@ -40,6 +41,34 @@ for (const path of files) {
   if (!html.includes('<title>')) bad.push(`${path}: missing title`);
   if (!html.includes('Affiliate disclosure')) bad.push(`${path}: missing affiliate disclosure`);
 
+  // Every editorial page declares its own canonical URL, matching its location
+  // on disk. Catches copy-paste pages that inherit another page's canonical.
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/);
+  if (!canonical) {
+    bad.push(`${path}: missing canonical`);
+  } else {
+    const expected = origin + '/' + path.slice(root.length + 1).replace(/index\.html$/, '');
+    if (canonical[1] !== expected) {
+      bad.push(`${path}: canonical is ${canonical[1]}, expected ${expected}`);
+    }
+  }
+
+  // Structured data must be present and parseable; malformed JSON-LD is worse
+  // than none, because Google reports it as an error against the page.
+  const ld = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  if (!ld) {
+    bad.push(`${path}: missing JSON-LD structured data`);
+  } else {
+    try {
+      const graph = JSON.parse(ld[1])['@graph'];
+      if (!Array.isArray(graph) || graph.length === 0) {
+        bad.push(`${path}: JSON-LD has no @graph nodes`);
+      }
+    } catch (error) {
+      bad.push(`${path}: invalid JSON-LD (${error.message})`);
+    }
+  }
+
   for (const match of html.matchAll(/href="(\/[^"#]+)"/g)) {
     let href = match[1];
     if (href.startsWith(`${siteBase}/`)) href = href.slice(siteBase.length);
@@ -61,4 +90,4 @@ if (bad.length) {
   process.exit(1);
 }
 
-console.log(`Checked ${files.length} HTML files; no missing titles/disclosures or broken internal links.`);
+console.log(`Checked ${files.length} HTML files; titles, disclosures, canonicals, JSON-LD and internal links all OK.`);
