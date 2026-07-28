@@ -74,6 +74,9 @@ tbody tr:hover td{background:var(--bg)}
 
 /* calculators */
 .calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+/* Two-column variant so each outcome's odds and commission sit side by side. */
+.calc.pairs{max-width:560px}
+.calc .span{grid-column:1/-1}
 .field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--dim)}
 .field input{padding:11px 12px;border:1px solid var(--line);background:var(--bg-raised);color:var(--ink);font-family:'IBM Plex Mono';font-size:14px}
 .field input:focus-visible{outline:2px solid var(--navy);outline-offset:1px}
