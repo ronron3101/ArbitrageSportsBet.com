@@ -51,7 +51,7 @@ function calcArb(){
 
  let html=`<strong>${profit>0?'Arbitrage found':'No arbitrage'}</strong><br>`;
  html+=`Book percentage${anyComm?' (after commission)':''}: ${(sum*100).toFixed(2)}%<br>`;
- html+=`${profit>0?'Guaranteed profit':'Guaranteed loss'}: ${money(profit)} (${(profit/total*100).toFixed(2)}%)<br><br>`;
+ html+=`${profit>0?'Theoretical profit':'Theoretical loss'}: ${money(profit)} (${(profit/total*100).toFixed(2)}%)<br><br>`;
  html+=legs.map((l,i)=>{
   const shown=l.eff!==l.dec?`${fmtOdds(l.dec)} → ${fmtOdds(l.eff)} after ${Number(l.comm).toFixed(2)}% commission`:fmtOdds(l.dec);
   return `Outcome ${i+1}: stake $${stakes[i].toFixed(2)} at ${shown} — returns $${returns[i].toFixed(2)}`;
